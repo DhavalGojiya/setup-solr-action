@@ -1,0 +1,62 @@
+name: Test Solr Action (Dev)
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  # -----------------------------
+  # Job 1: Test Custom Solr Action
+  # -----------------------------
+  solr-action-dev:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        solr-version: ["8.9.0"]  # Matrix versions
+    env:
+      SOLR_CORE: test_core  
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v5
+
+      - name: Setup Apache Solr Infrastructure (Local Action)
+        uses: ./  # local path to action (action.yml)
+        with:
+          solr-version: ${{ matrix.solr-version }}
+          solr-core-name: ${{ env.SOLR_CORE }}
+          solr-custom-configset-path: tests/fixtures/solr_configs/
+
+      - name: Verify Solr is running
+        run: |
+          RESPONSE=$(curl -s --fail "http://127.0.0.1:8983/solr/${SOLR_CORE}/admin/ping?wt=json")
+          echo "$RESPONSE" | grep -q 'OK'
+          if [ $? -eq 0 ]; then
+            echo "✅ Solr is healthy"
+          else
+            echo "❌ Solr ping failed"
+            exit 1
+          fi
+  # -----------------------------
+  # Job 2: Package checks & build
+  # -----------------------------
+  package:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v5
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Run lint & formatting check
+        run: npx biome check .
+
+      - name: Run build
+        run: npm run build

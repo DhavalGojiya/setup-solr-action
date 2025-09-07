@@ -1,0 +1,27 @@
+{
+  "name": "solr-setup-action",
+  "version": "1.0.0",
+  "description": "GitHub Action to setup Apache Solr in CI pipeline.",
+  "author": "Dhaval Gojiya <dhavalgojiya10@gmail.com>",
+  "contributors": [
+    "Dhaval Gojiya <dhavalgojiya10@gmail.com>"
+  ],
+  "license": "MIT",
+  "main": "src/action.js",
+  "scripts": {
+    "build": "tsup",
+    "check": "biome check --write .",
+    "format:sh": "shfmt -w -i 4 src/scripts/",
+    "act": "act -j solr-action-dev",
+    "all": "npm install && npm run check && npm run format:sh && npm run build"
+  },
+  "devDependencies": {
+    "@actions/core": "^1.11.1",
+    "@actions/exec": "^1.1.1",
+    "@biomejs/biome": "^2.2.2",
+    "@types/node": "^24.3.1",
+    "shfmt": "^0.0.1",
+    "tsup": "^8.5.0",
+    "typescript": "^5.9.2"
+  }
+}

@@ -1,0 +1,22 @@
+name: 'Setup Apache Solr'
+description: 'Setup Apache Solr in CI, create a core, and configure custom configsets.'
+author: 'Dhaval Gojiya'
+
+inputs:
+  solr-version:
+    description: 'Solr Docker image version'
+    required: true
+  solr-core-name:
+    description: 'Name of the Solr core'
+    required: true
+  solr-custom-configset-path:
+    description: 'Optional path to a custom Solr configset (schema.xml, solrconfig.xml, etc.)'
+    required: false
+  solr-port:
+    description: 'Host port on which Solr should be accessible (maps to solr container port 8983)'
+    required: false
+    default: '8983'
+
+runs:
+  using: 'node20'
+  main: 'dist/index.js'
