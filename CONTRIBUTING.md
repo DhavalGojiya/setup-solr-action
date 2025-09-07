@@ -1,13 +1,13 @@
-# 🤝 Contributing to solr-setup-action
+# 🤝 Contributing to setup-solr-action
 
-First off, thank you for considering contributing to **solr-setup-action** 🎉.  
+First off, thank you for considering contributing to **setup-solr-action** 🎉.
 Contributions, issues, and feature requests are welcome!
 
 ---
 
 ## 📑 Table of Contents
 
-- [🤝 Contributing to solr-setup-action](#-contributing-to-solr-setup-action)
+- [🤝 Contributing to setup-solr-action](#-contributing-to-setup-solr-action)
   - [📑 Table of Contents](#-table-of-contents)
   - [🛠️ Getting Started](#️-getting-started)
   - [🧹 Code Quality (Linting \& Formatting)](#-code-quality-linting--formatting)
@@ -27,7 +27,7 @@ Contributions, issues, and feature requests are welcome!
 
 ```bash
    git clone https://github.com/dhavalgojiya/setup-solr-action.git
-   cd solr-setup-action
+   cd setup-solr-action
 ````
 
 3. Install project dependencies:
@@ -101,7 +101,7 @@ This will run the action in a local environment, useful before pushing changes.
 
 ## 📥 Submitting a Pull Request
 
-1. **Create a new branch** for your work (don’t work directly on `main`):
+1.  **Create a new branch from `main`** for your work (don’t work directly on `main`):
 
    ```bash
    git checkout -b feature/add-xyz
@@ -109,9 +109,9 @@ This will run the action in a local environment, useful before pushing changes.
    git checkout -b docs/improve-readme
    ```
 
-   > Branch names should follow the format:
-   > `feature/...` → new features
-   > `fix/...` → bug fixes
+   > Branch names should follow the format: <br>
+   > `feature/...` → new features <br>
+   > `fix/...` → bug fixes <br>
    > `docs/...` → documentation updates
 
 2. **Make your changes** and commit with a clear message:
