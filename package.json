@@ -1,5 +1,5 @@
 {
-  "name": "solr-setup-action",
+  "name": "setup-solr-action",
   "version": "1.0.0",
   "description": "GitHub Action to setup Apache Solr in CI pipeline.",
   "author": "Dhaval Gojiya <dhavalgojiya10@gmail.com>",
