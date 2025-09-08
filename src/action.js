@@ -7,7 +7,7 @@ const path = require("node:path");
  */
 async function run() {
   try {
-    // Get inputs from action.yaml
+    // Get inputs from action.yml
     const solrVersion = core.getInput("solr-version", { required: true });
     const coreName = core.getInput("solr-core-name", { required: true });
     const confDir = core.getInput("solr-custom-configset-path"); // optional

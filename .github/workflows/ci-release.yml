@@ -1,0 +1,47 @@
+name: Test Solr Action Release
+
+on:
+  push:
+    tags:
+      - "v*.*.*"   # Trigger only for semantic version tags (e.g., v1.0.0, v2.3.4)
+
+jobs:
+  solr-release-test:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        solr-version: ["8.9.0"]   # Matrix versions
+    env:
+      SOLR_CORE: test_core
+    steps:
+      # -----------------------------
+      # 1. Checkout Repository
+      # -----------------------------
+      - name: 📥 Checkout Repository
+        uses: actions/checkout@v5
+
+      # -----------------------------
+      # 2. Setup Apache Solr
+      # -----------------------------
+      - name: ⚡ Setup Apache Solr Infrastructure
+        uses: dhavalgojiya/setup-solr-action@${{ github.ref_name }}
+        with:
+          solr-version: ${{ matrix.solr-version }}
+          solr-core-name: ${{ env.SOLR_CORE }}
+          solr-custom-configset-path: tests/fixtures/solr_configs/
+
+      # -----------------------------
+      # 3. Verify Solr is Running
+      # -----------------------------
+      - name: ✅ Verify Solr Health
+        run: |
+          echo "Pinging Solr Core: ${SOLR_CORE}"
+          RESPONSE=$(curl -s --fail "http://127.0.0.1:8983/solr/${SOLR_CORE}/admin/ping?wt=json")
+
+          if echo "$RESPONSE" | grep -q '"status":"OK"'; then
+            echo "🎉 Solr is healthy and responding"
+          else
+            echo "❌ Solr ping failed!"
+            echo "Response: $RESPONSE"
+            exit 1
+          fi

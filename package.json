@@ -12,7 +12,7 @@
     "build": "tsup",
     "check": "biome check --write .",
     "format:sh": "shfmt -w -i 4 src/scripts/",
-    "act": "act -j solr-action-dev",
+    "act": "act pull_request -W .github/workflows/ci-test.yml --container-architecture linux/amd64",
     "all": "npm install && npm run check && npm run format:sh && npm run build"
   },
   "devDependencies": {
