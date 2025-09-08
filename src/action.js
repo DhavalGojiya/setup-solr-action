@@ -21,9 +21,9 @@ async function run() {
     const confPath = confDir ? path.resolve(workspace, confDir) : "";
 
     core.info(`🚀 Solr version: ${solrVersion}`);
-    core.info(`🗂️  Solr Core name: ${coreName}`);
+    core.info(`🗂️ Solr Core name: ${coreName}`);
     core.info(`🌐 Solr port: ${solrPort}`);
-    if (confPath) core.info(`🛠️  Solr Custom configset path: ${confPath}`);
+    if (confPath) core.info(`🛠️ Solr Custom configset path: ${confPath}`);
 
     // Execute the bash script with arguments
     // Arguments: <solr-version> <core-name> <configset-path> <port>

@@ -1,14 +1,20 @@
 # ⚡ Setup Apache Solr (GitHub Action)
 
+<p align="center">
+  <img src="assets/images/project-logo.png" width="90%" alt="Project Apache Solr Logo"/>
+</p>
+
 Easily spin up an [Apache Solr](https://solr.apache.org/) instance inside your **GitHub Actions CI** pipeline.  
 This action makes it simple to provision Solr during your tests or builds, without needing complex manual setup.
 
 It will:
 
-* ✅ Pull the specified Solr Docker image  
-* ✅ Start Solr on your chosen host port  
-* ✅ Create a Solr core with the name you provide  
-* ✅ Optionally copy custom configsets (`schema.xml`, `solrconfig.xml`, etc.)  
+- ✅ Pull the specified Solr Docker image
+- ✅ Start Solr on your chosen host port
+- ✅ Create a Solr core with the name you provide
+- ✅ Optionally copy custom configsets (`schema.xml`, `solrconfig.xml`, etc.)
+- ✅ Simplifies Solr setup in CI
+- ✅ Lets you focus on testing, not infrastructure
 
 ---
 
@@ -23,6 +29,7 @@ It will:
   - [🔎 Debugging \& Logs](#-debugging--logs)
   - [🛠️ Example Workflow](#️-example-workflow)
   - [💡 Why use this action?](#-why-use-this-action)
+  - [🧪 Testing](#-testing)
   - [🤝 Contributing](#-contributing)
   - [👨‍💻 About the Author](#-about-the-author)
   - [📜 License](#-license)
@@ -37,9 +44,9 @@ Add this step to your workflow for a **basic setup**:
 - name: Setup Apache Solr Infrastructure
   uses: dhavalgojiya/setup-solr-action@v1
   with:
-    solr-version: '8.9.0'
-    solr-core-name: 'my_test_core'
-````
+    solr-version: "8.9.0"
+    solr-core-name: "my_test_core"
+```
 
 Run Solr on a **different port**:
 
@@ -47,9 +54,9 @@ Run Solr on a **different port**:
 - name: Setup Apache Solr Infrastructure
   uses: dhavalgojiya/setup-solr-action@v1
   with:
-    solr-version: '8.9.0'
-    solr-core-name: 'my_test_core'
-    solr-port: '9011'
+    solr-version: "8.9.0"
+    solr-core-name: "my_test_core"
+    solr-port: "9011"
 ```
 
 Provide a **custom configset** (e.g., your own `schema.xml` and `solrconfig.xml`):
@@ -58,9 +65,9 @@ Provide a **custom configset** (e.g., your own `schema.xml` and `solrconfig.xml`
 - name: Setup Apache Solr Infrastructure
   uses: dhavalgojiya/setup-solr-action@v1
   with:
-    solr-version: '8.9.0'
-    solr-core-name: 'my_test_core'
-    solr-custom-configset-path: 'solr_configs/' # Path must be relative to repo root
+    solr-version: "8.9.0"
+    solr-core-name: "my_test_core"
+    solr-custom-configset-path: "solr_configs/" # Path must be relative to repo root
 ```
 
 ---
@@ -69,10 +76,10 @@ Provide a **custom configset** (e.g., your own `schema.xml` and `solrconfig.xml`
 
 | Name                         | Required | Default | Description                                                                                              |
 | ---------------------------- | -------- | ------- | -------------------------------------------------------------------------------------------------------- |
-| `solr-version`               | ✅ Yes    | —       | The Solr Docker image version to use (e.g., `9.6.1`, `8.9.0-slim`).                                      |
-| `solr-core-name`             | ✅ Yes    | —       | The name of the Solr core to create.                                                                     |
-| `solr-custom-configset-path` | ❌ No     | —       | Path to a folder containing your custom Solr configset (e.g., schema.xml, solrconfig.xml, synonyms.txt). |
-| `solr-port`                  | ❌ No     | `8983`  | Host port on which Solr will be accessible (maps to container port `8983`).                              |
+| `solr-version`               | ✅ Yes   | —       | The Solr Docker image version to use (e.g., `9.6.1`, `8.9.0-slim`).                                      |
+| `solr-core-name`             | ✅ Yes   | —       | The name of the Solr core to create.                                                                     |
+| `solr-custom-configset-path` | ❌ No    | —       | Path to a folder containing your custom Solr configset (e.g., schema.xml, solrconfig.xml, synonyms.txt). |
+| `solr-port`                  | ❌ No    | `8983`  | Host port on which Solr will be accessible (maps to container port `8983`).                              |
 
 ---
 
@@ -83,16 +90,16 @@ A configset is a folder that contains all the configuration files Solr needs to 
 
 Typical files inside a custom configset include:
 
-* **`schema.xml`** → Defines the structure of your Solr documents (fields, field types, analyzers, tokenizers).  
-  Example: a `title` field as text, an `id` field as a unique key, or a `price` field as a float.  
+- **`schema.xml`** → Defines the structure of your Solr documents (fields, field types, analyzers, tokenizers).
+  Example: a `title` field as text, an `id` field as a unique key, or a `price` field as a float.
 
-* **`solrconfig.xml`** → Controls Solr core behavior and request handling.  
-  Example: enabling query handlers, faceting, caching strategies, or replication settings.  
+- **`solrconfig.xml`** → Controls Solr core behavior and request handling.
+  Example: enabling query handlers, faceting, caching strategies, or replication settings.
 
-* **`synonyms.txt`** → Lists synonyms to improve search results.  
-  Example: if you add `laptop, notebook`, then searching for "notebook" will also return results containing "laptop".  
+- **`synonyms.txt`** → Lists synonyms to improve search results.
+  Example: if you add `laptop, notebook`, then searching for "notebook" will also return results containing "laptop".
 
-* Other optional files like **`stopwords.txt`**, **`protwords.txt`**, etc. depending on your project’s search needs.  
+- Other optional files like **`stopwords.txt`**, **`protwords.txt`**, etc. depending on your project’s search needs.
 
 ---
 
@@ -113,9 +120,9 @@ solr_configs/
 - name: Setup Apache Solr with custom configset
   uses: dhavalgojiya/setup-solr-action@v1
   with:
-   solr-version: '8.9.0'
-   solr-core-name: 'my_project_core'
-   solr-custom-configset-path: 'solr_configs/' # relative to repo root
+    solr-version: "8.9.0"
+    solr-core-name: "my_project_core"
+    solr-custom-configset-path: "solr_configs/" # relative to repo root
 ```
 
 This ensures your **custom schema, configs, and search enhancements** are automatically copied into the Solr core during setup.
@@ -153,9 +160,9 @@ name: Example Workflow with solr
 
 on:
   push:
-    branches: [ "main" ]
+    branches: ["main"]
   pull_request:
-    branches: [ "main" ]
+    branches: ["main"]
 
 jobs:
   test:
@@ -167,9 +174,9 @@ jobs:
       - name: Setup Apache Solr Infrastructure
         uses: dhavalgojiya/setup-solr-action@v1
         with:
-          solr-version: '8.9.0'
-          solr-core-name: 'products_core'
-          solr-custom-configset-path: 'solr_configs/'
+          solr-version: "8.9.0"
+          solr-core-name: "products_core"
+          solr-custom-configset-path: "solr_configs/"
 
       - name: Verify Solr is running
         run: curl "http://127.0.0.1:8983/solr/admin/cores?action=STATUS&core=products_core"
@@ -177,7 +184,7 @@ jobs:
       - name: Setup Python
         uses: actions/setup-python@v5
         with:
-          python-version: '3.12'
+          python-version: "3.12"
 
       - name: Install dependencies
         run: |
@@ -192,24 +199,36 @@ jobs:
 
 ## 💡 Why use this action?
 
-* No need to manually install or configure Solr on CI runners.
-* Fully **Docker-based**: reliable, reproducible environments.
-* Works seamlessly with your own **custom Solr schemas/configsets**.
-* Great for integration tests that depend on a running Solr core.
+- No need to manually install or configure Solr on CI runners.
+- Fully **Docker-based**: reliable, reproducible environments.
+- Works seamlessly with your own **custom Solr schemas/configsets**.
+- Great for integration tests that depend on a running Solr core.
+
+---
+
+## 🧪 Testing
+
+To test this GitHub Action locally, simply run:
+
+```bash
+npm run act
+```
+
+This will simulate your workflow on your local machine using [act](https://github.com/nektos/act).
 
 ---
 
 ## 🤝 Contributing
 
 Want to improve this project? Contributions are welcome!  
-Please check out the [Contributing Guide](./CONTRIBUTING.md) for details.  
+Please check out the [Contributing Guide](./CONTRIBUTING.md) for details.
 
 ---
 
 ## 👨‍💻 About the Author
 
 Hi, I’m **Dhaval Gojiya** — a passionate **Software Engineer** and also a **Farmer** 🌱.  
-I love building open-source tools that simplify workflows, while staying curious and grounded in both tech and nature.    
+I love building open-source tools that simplify workflows, while staying curious and grounded in both tech and nature.
 
 ---
 
@@ -217,6 +236,6 @@ I love building open-source tools that simplify workflows, while staying curious
 
 This project is licensed under the [MIT License](./LICENSE).
 
----
-
-👉 With this action, you can easily integrate Solr into your CI workflows and focus on testing your search-powered applications instead of managing Solr setup.
+<p align="center">
+  <img src="https://img.shields.io/badge/Made%20by-Dhaval%20Gojiya-bluered?style=for-the-badge&logo=github" alt="Made by Dhaval Gojiya"/>
+</p>

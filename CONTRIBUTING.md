@@ -22,13 +22,13 @@ Contributions, issues, and feature requests are welcome!
 
 ## 🛠️ Getting Started
 
-1. **Fork** this repository.  
-2. **Clone** your fork locally:  
+1. **Fork** this repository.
+2. **Clone** your fork locally:
 
 ```bash
    git clone https://github.com/dhavalgojiya/setup-solr-action.git
    cd setup-solr-action
-````
+```
 
 3. Install project dependencies:
 
@@ -44,7 +44,7 @@ Contributions, issues, and feature requests are welcome!
 
 We use [Biome](https://biomejs.dev/) for linting and formatting, along with [shfmt](https://github.com/mvdan/sh) for shell scripts.
 
-* Run linting & formatting checks:
+- Run linting & formatting checks:
 
   ```bash
   npm run check
@@ -52,7 +52,7 @@ We use [Biome](https://biomejs.dev/) for linting and formatting, along with [shf
 
   > This will automatically apply fixes for formatting/lint issues across the project.
 
-* Format shell scripts (in `src/scripts/`):
+- Format shell scripts (in `src/scripts/`):
 
   ```bash
   npm run format:sh
@@ -65,7 +65,7 @@ We use [Biome](https://biomejs.dev/) for linting and formatting, along with [shf
 We use [tsup](https://tsup.egoist.dev/) to bundle the action.
 This compiles the source code into a distributable format inside the **`dist/`** folder.
 
-* Run build:
+- Run build:
 
   ```bash
   npm run build
@@ -103,16 +103,13 @@ This will run the action in a local environment, useful before pushing changes.
 
 1.  **Create a new branch from `main`** for your work (don’t work directly on `main`):
 
-   ```bash
-   git checkout -b feature/add-xyz
-   git checkout -b fix/solr-port-issue
-   git checkout -b docs/improve-readme
-   ```
+```bash
+git checkout -b feature/add-xyz
+git checkout -b fix/solr-port-issue
+git checkout -b docs/improve-readme
+```
 
-   > Branch names should follow the format: <br>
-   > `feature/...` → new features <br>
-   > `fix/...` → bug fixes <br>
-   > `docs/...` → documentation updates
+> Branch names should follow the format: <br> > `feature/...` → new features <br> > `fix/...` → bug fixes <br> > `docs/...` → documentation updates
 
 2. **Make your changes** and commit with a clear message:
 
@@ -130,19 +127,19 @@ This will run the action in a local environment, useful before pushing changes.
 
    In the PR description:
 
-   * Link the related issue using `Fixes #<issue_number>` (if applicable).
-   * Explain what your PR changes or adds.
-   * If it’s a new feature, provide usage examples.
-   * If possible, add/update tests to cover your changes.
+   - Link the related issue using `Fixes #<issue_number>` (if applicable).
+   - Explain what your PR changes or adds.
+   - If it’s a new feature, provide usage examples.
+   - If possible, add/update tests to cover your changes.
 
 ---
 
 ## 📜 Guidelines
 
-* Follow existing coding style and formatting.
-* Keep commits clean and meaningful.
-* Update documentation (README, comments) if you change behavior.
-* Pull requests should be small and focused.
+- Follow existing coding style and formatting.
+- Keep commits clean and meaningful.
+- Update documentation (README, comments) if you change behavior.
+- Pull requests should be small and focused.
 
 ---
 
