@@ -1,0 +1,89 @@
+name: Build & Test
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  # -----------------------------
+  # Job 1: Package Checks & Build
+  # -----------------------------
+  package:
+    runs-on: ubuntu-latest
+    steps:
+      # -----------------------------
+      # 1. Checkout Repository
+      # -----------------------------
+      - name: 📥 Checkout Repository
+        uses: actions/checkout@v5
+
+      # -----------------------------
+      # 2. Setup Node.js
+      # -----------------------------
+      - name: ⚙️ Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      # -----------------------------
+      # 3. Install Dependencies
+      # -----------------------------
+      - name: 📦 Install Dependencies
+        run: npm ci
+
+      # -----------------------------
+      # 4. Run Lint & Formatting Check
+      # -----------------------------
+      - name: 🧹 Run Lint & Formatting Check
+        run: npx biome check .
+
+      # -----------------------------
+      # 5. Build the Package
+      # -----------------------------
+      - name: 🏗️ Run Build
+        run: npm run build
+
+  # -----------------------------
+  # Job 2: Test Custom Solr Action
+  # -----------------------------
+  solr-dev-test:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        solr-version: ["8.9.0"]   # Matrix versions
+    env:
+      SOLR_CORE: test_core
+    steps:
+      # -----------------------------
+      # 1. Checkout Repository
+      # -----------------------------
+      - name: 📥 Checkout Repository
+        uses: actions/checkout@v5
+
+      # -----------------------------
+      # 2. Setup Apache Solr (Local Action)
+      # -----------------------------
+      - name: ⚡ Setup Apache Solr Infrastructure (Local)
+        uses: ./   # Use local action.yml
+        with:
+          solr-version: ${{ matrix.solr-version }}
+          solr-core-name: ${{ env.SOLR_CORE }}
+          solr-custom-configset-path: tests/fixtures/solr_configs/
+
+      # -----------------------------
+      # 3. Verify Solr is Running
+      # -----------------------------
+      - name: ✅ Verify Solr Health
+        run: |
+          echo "Pinging Solr Core: ${SOLR_CORE}"
+          RESPONSE=$(curl -s --fail "http://127.0.0.1:8983/solr/${SOLR_CORE}/admin/ping?wt=json")
+          
+          if echo "$RESPONSE" | grep -q '"status":"OK"'; then
+            echo "🎉 Solr is healthy and responding"
+          else
+            echo "❌ Solr ping failed!"
+            echo "Response: $RESPONSE"
+            exit 1
+          fi
