@@ -145,4 +145,4 @@ git checkout -b docs/improve-readme
 
 ## 🙌 Thank You
 
-Every contribution counts! Whether it's fixing a typo, improving documentation, or suggesting a new feature — we appreciate your effort 💙.
+Every contribution counts! Whether it's fixing a typo, improving documentation, or suggesting a new feature — we appreciate your efforts 💙.

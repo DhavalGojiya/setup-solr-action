@@ -3,7 +3,7 @@ name: Test Solr Action Release
 on:
   push:
     tags:
-      - "v*.*.*"   # Trigger only for semantic version tags (e.g., v1.0.0, v2.3.4)
+      - "v[0-9]"   # Major version release (e.g., v1, v2, ..., v9)
 
 jobs:
   solr-release-test:
@@ -21,10 +21,10 @@ jobs:
         uses: actions/checkout@v5
 
       # -----------------------------
-      # 2. Setup Apache Solr
+      # 2. Setup Apache Solr (Release Action)
       # -----------------------------
-      - name: ⚡ Setup Apache Solr Infrastructure
-        uses: dhavalgojiya/setup-solr-action@${{ github.ref_name }}
+      - name: ⚡ Setup Apache Solr Infrastructure (Release)
+        uses: dhavalgojiya/setup-solr-action@v1
         with:
           solr-version: ${{ matrix.solr-version }}
           solr-core-name: ${{ env.SOLR_CORE }}

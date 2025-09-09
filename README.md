@@ -90,14 +90,15 @@ A configset is a folder that contains all the configuration files Solr needs to 
 
 Typical files inside a custom configset include:
 
-- **`schema.xml`** → Defines the structure of your Solr documents (fields, field types, analyzers, tokenizers).
+- **`schema.xml`** → Defines the structure of your Solr documents (fields, field types, analyzers, tokenizers).\
   Example: a `title` field as text, an `id` field as a unique key, or a `price` field as a float.
 
-- **`solrconfig.xml`** → Controls Solr core behavior and request handling.
+- **`solrconfig.xml`** → Controls Solr core behavior and request handling.\
   Example: enabling query handlers, faceting, caching strategies, or replication settings.
 
-- **`synonyms.txt`** → Lists synonyms to improve search results.
-  Example: if you add `laptop, notebook`, then searching for "notebook" will also return results containing "laptop".
+- **`synonyms.txt`** → Lists synonyms to improve search results.\
+  Example: `Defense => Armed forces, national security`\
+  Searching for "Defense" will also match documents containing "Armed forces" or "national security".
 
 - Other optional files like **`stopwords.txt`**, **`protwords.txt`**, etc. depending on your project’s search needs.
 
