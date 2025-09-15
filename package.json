@@ -6,6 +6,8 @@
   "contributors": [
     "Dhaval Gojiya <dhavalgojiya10@gmail.com>"
   ],
+  "repository": "https://github.com/dhavalgojiya/setup-solr-action",
+  "private": true,
   "license": "MIT",
   "main": "src/action.js",
   "scripts": {
