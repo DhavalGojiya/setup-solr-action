@@ -179,9 +179,6 @@ jobs:
           solr-core-name: "products_core"
           solr-custom-configset-path: "solr_configs/"
 
-      - name: Verify Solr is running
-        run: curl "http://127.0.0.1:8983/solr/admin/cores?action=STATUS&core=products_core"
-
       - name: Setup Python
         uses: actions/setup-python@v5
         with:
@@ -192,7 +189,7 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r requirements.txt
 
-      - name: Run tests
+      - name: Run tests  # Solr is available on host port 8983
         run: pytest -v products/tests/test_solr_product_apis.py
 ```
 

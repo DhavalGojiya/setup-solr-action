@@ -15,7 +15,7 @@
     "check": "biome check --write .",
     "format:sh": "shfmt -w -i 4 src/scripts/",
     "act": "act pull_request -W .github/workflows/ci-test.yml --container-architecture linux/amd64",
-    "all": "npm install && npm run check && npm run format:sh && npm run build"
+    "all": "npm install --no-fund && npm run check && npm run format:sh && npm run build"
   },
   "devDependencies": {
     "@actions/core": "^1.11.1",

@@ -20,10 +20,12 @@ async function run() {
     const workspace = process.env.GITHUB_WORKSPACE || process.cwd();
     const confPath = confDir ? path.resolve(workspace, confDir) : "";
 
+    core.info("════════════════════════════════════════════");
     core.info(`🚀 Solr version: ${solrVersion}`);
     core.info(`🗂️ Solr Core name: ${coreName}`);
-    core.info(`🌐 Solr port: ${solrPort}`);
+    core.info(`🔌 Solr host port: ${solrPort}`);
     if (confPath) core.info(`🛠️ Solr Custom configset path: ${confPath}`);
+    core.info("════════════════════════════════════════════");
 
     // Execute the bash script with arguments
     // Arguments: <solr-version> <core-name> <configset-path> <port>
