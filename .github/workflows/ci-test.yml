@@ -28,19 +28,25 @@ jobs:
           node-version: "20"
 
       # -----------------------------
-      # 3. Install Dependencies
+      # 3. Check package-lock.json is up-to-date
+      # -----------------------------
+      - name: 🔒 Check package-lock.json Sync
+        run: npx --yes package-lock-utd@1.1.3
+
+      # -----------------------------
+      # 4. Install Dependencies
       # -----------------------------
       - name: 📦 Install Dependencies
         run: npm ci
 
       # -----------------------------
-      # 4. Run Lint & Formatting Check
+      # 5. Run Lint & Formatting Check
       # -----------------------------
       - name: 🧹 Run Lint & Formatting Check
         run: npx biome check .
 
       # -----------------------------
-      # 5. Build the Package
+      # 6. Build the Package
       # -----------------------------
       - name: 🏗️ Run Build
         run: npm run build
