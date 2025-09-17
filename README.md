@@ -138,9 +138,9 @@ The action provides clear and emoji-friendly logging to help you follow what’s
 ```
 🚀 Solr version: 8.9.0
 🗂️ Solr Core name: test_core
-🌐 Solr port: 9011
-🛠️ Solr Custom configset path: /home/runner/work/myrepo/solr_configs/
-✅ Solr core 'test_core' is healthy!
+🔌 Solr host port: 8983
+🛠️ Solr Custom configset path: /home/runner/work/<REPO>/<REPO>/solr_configs
+✅ Solr core [test_core] is healthy!
 ```
 
 If Solr fails to become healthy within **30 seconds** (configurable by retry logic in the script), the action will stop and exit with an error.
@@ -179,9 +179,6 @@ jobs:
           solr-core-name: "products_core"
           solr-custom-configset-path: "solr_configs/"
 
-      - name: Verify Solr is running
-        run: curl "http://127.0.0.1:8983/solr/admin/cores?action=STATUS&core=products_core"
-
       - name: Setup Python
         uses: actions/setup-python@v5
         with:
@@ -192,7 +189,7 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r requirements.txt
 
-      - name: Run tests
+      - name: Run tests  # Solr is available on host port 8983
         run: pytest -v products/tests/test_solr_product_apis.py
 ```
 
