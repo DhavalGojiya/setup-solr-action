@@ -138,9 +138,9 @@ The action provides clear and emoji-friendly logging to help you follow what’s
 ```
 🚀 Solr version: 8.9.0
 🗂️ Solr Core name: test_core
-🌐 Solr port: 9011
-🛠️ Solr Custom configset path: /home/runner/work/myrepo/solr_configs/
-✅ Solr core 'test_core' is healthy!
+🔌 Solr host port: 8983
+🛠️ Solr Custom configset path: /home/runner/work/<REPO>/<REPO>/solr_configs
+✅ Solr core [test_core] is healthy!
 ```
 
 If Solr fails to become healthy within **30 seconds** (configurable by retry logic in the script), the action will stop and exit with an error.

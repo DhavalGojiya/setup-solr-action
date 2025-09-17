@@ -78,7 +78,7 @@ fi
 SOLR_CORE_RELOAD_URL="http://127.0.0.1:$SOLR_HOST_PORT/solr/admin/cores?action=RELOAD&core=$SOLR_CORE_NAME"
 
 echo "🔄 Reloading Solr core [$SOLR_CORE_NAME]... ⏳"
-echo "   🌐 URL: $SOLR_CORE_RELOAD_URL"
+echo "   🌐 URL: '${SOLR_CORE_RELOAD_URL}'"
 
 RESPONSE=$(curl -s -w "\n%{http_code}" "$SOLR_CORE_RELOAD_URL")
 
