@@ -35,7 +35,18 @@ if [ -z "$SOLR_CONTAINER" ]; then
 fi
 
 # -----------------------------------------
-# Step 3: Wait for Solr core to become ready
+# Step 3: Save container ID into GitHub Actions state
+# -----------------------------------------
+if [ -n "$GITHUB_STATE" ]; then
+    if echo "SOLR_CONTAINER=$SOLR_CONTAINER" >>"$GITHUB_STATE"; then
+        echo "ℹ️ Saved Solr container ID to GITHUB_STATE: $SOLR_CONTAINER"
+    else
+        echo "⚠️ Failed to save Solr container ID to GITHUB_STATE"
+    fi
+fi
+
+# -----------------------------------------
+# Step 4: Wait for Solr core to become ready
 # -----------------------------------------
 SOLR_CORE_PING_URL="http://127.0.0.1:$SOLR_HOST_PORT/solr/$SOLR_CORE_NAME/admin/ping?wt=json"
 
@@ -58,7 +69,7 @@ done
 echo "✅ Solr core [$SOLR_CORE_NAME] is healthy!"
 
 # -----------------------------------------
-# Step 4: Copy solr custom configs if provided
+# Step 5: Copy solr custom configs if provided
 # -----------------------------------------
 if [ -n "$SOLR_CUSTOM_CONFIGSET_PATH" ]; then
     echo "📦 Copying custom configs from '$SOLR_CUSTOM_CONFIGSET_PATH' to Solr core [$SOLR_CORE_NAME]... ⏳"
@@ -73,7 +84,7 @@ else
 fi
 
 # -----------------------------------------
-# Step 5: Reload the Solr core to pick up changes
+# Step 6: Reload the Solr core to pick up changes
 # -----------------------------------------
 SOLR_CORE_RELOAD_URL="http://127.0.0.1:$SOLR_HOST_PORT/solr/admin/cores?action=RELOAD&core=$SOLR_CORE_NAME"
 
