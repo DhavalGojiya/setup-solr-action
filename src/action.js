@@ -69,7 +69,7 @@ async function cleanup() {
     // Stop and remove the Solr container along with its volumes
     await exec.exec("docker", ["rm", "-f", "-v", containerId]);
 
-    core.info(`| ✅ Solr Container '${containerId}' removed successfully`);
+    core.info(`| ✅  Solr Container '${containerId}' removed successfully`);
     core.info(
       "| ---------------------------------------------------------------------------------------",
     );
