@@ -1,6 +1,7 @@
 const core = require("@actions/core");
 const exec = require("@actions/exec");
 const path = require("node:path");
+const { IsPost } = require("./state-helper");
 
 /**
  * Main function for the GitHub Action
@@ -41,5 +42,49 @@ async function run() {
   }
 }
 
-// Run the action
-run();
+async function cleanup() {
+  try {
+    const containerId = core.getState("SOLR_CONTAINER");
+
+    core.info(
+      "| -------------------- 🧹 Solr Container Cleanup (setup-solr-action) -------------------",
+    );
+
+    if (!containerId) {
+      core.info(
+        "| ⚠️ No Solr container ID found in `GITHUB_STATE`. Skipping cleanup.",
+      );
+      core.info(
+        "| --------------------------------------------------------------------------------------",
+      );
+      return;
+    }
+
+    core.info(
+      `| ℹ️  Found Solr container '${containerId}' created by this action (setup-solr-action)`,
+    );
+
+    core.info(`| 🗑️  Removing container... ⏳`);
+
+    // Stop and remove the Solr container along with its volumes
+    await exec.exec("docker", ["rm", "-f", "-v", containerId]);
+
+    core.info(`| ✅  Solr Container '${containerId}' removed successfully`);
+    core.info(
+      "| ---------------------------------------------------------------------------------------",
+    );
+  } catch (error) {
+    core.warning(
+      `| ❌ Failed to cleanup container: ${error?.message ?? error}`,
+    );
+  }
+}
+
+// Main
+if (!IsPost) {
+  run();
+}
+// Post
+else {
+  cleanup();
+}
