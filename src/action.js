@@ -14,7 +14,7 @@ async function run() {
     const confDir = core.getInput("solr-custom-configset-path"); // optional
     const solrPort = core.getInput("solr-port"); // optional
 
-    // Resolve path to the bundled setup script
+    // Resolve path to the bundled setup solr script
     const scriptPath = path.join(__dirname, "scripts", "setup-solr.sh");
 
     // Resolve workspace path and optional configset directory
@@ -52,7 +52,7 @@ async function cleanup() {
 
     if (!containerId) {
       core.info(
-        "| ⚠️ No Solr container ID found in `GITHUB_STATE`. Skipping cleanup.",
+        "| ⚠️  No Solr container ID found in `GITHUB_STATE`. Skipping cleanup.",
       );
       core.info(
         "| --------------------------------------------------------------------------------------",
@@ -75,7 +75,7 @@ async function cleanup() {
     );
   } catch (error) {
     core.warning(
-      `| ❌ Failed to cleanup container: ${error?.message ?? error}`,
+      `| ❌  Failed to cleanup container: ${error?.message ?? error}`,
     );
   }
 }
