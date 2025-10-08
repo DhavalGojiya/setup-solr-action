@@ -4,7 +4,7 @@ We take security seriously. Please follow this policy to report vulnerabilities 
 
 > Screenshot of security file location in the repo:
 
-![Security Tab](https://github.com/DhavalGojiya/setup-solr-action/blob/main/assets/images/security-tab.png?raw=true)
+![Security Tab](https://raw.githubusercontent.com/DhavalGojiya/setup-solr-action/main/assets/images/security-tab.png)
 
 ## Supported Versions
 
