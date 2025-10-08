@@ -1,7 +1,7 @@
 # ⚡ Setup Apache Solr (GitHub Action)
 
 <p align="center">
-  <img src="assets/images/project-logo.png" width="90%" alt="Project Apache Solr Logo"/>
+  <img src="https://raw.githubusercontent.com/DhavalGojiya/setup-solr-action/main/assets/images/project-logo.png" width="90%" alt="Project Apache Solr Logo"/>
 </p>
 
 Easily spin up an [Apache Solr](https://solr.apache.org/) instance inside your **GitHub Actions CI** pipeline.  
@@ -153,8 +153,7 @@ This ensures your CI doesn’t hang indefinitely.
 Here’s a complete example workflow that:
 
 1. Sets up Solr with your action.
-2. Verifies Solr is reachable with `curl`.
-3. Runs Python tests (`pytest`).
+2. Runs Python tests (`pytest`).
 
 ```yaml
 name: Example Workflow with solr
