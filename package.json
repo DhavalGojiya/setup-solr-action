@@ -1,7 +1,7 @@
 {
   "name": "setup-solr-action",
   "version": "1.0.2",
-  "description": "GitHub Action to setup Apache Solr in CI pipeline.",
+  "description": "Setup Apache Solr in CI, create a core, and configure custom configsets",
   "author": "Dhaval Gojiya <dhavalgojiya10@gmail.com>",
   "contributors": [
     "Dhaval Gojiya <dhavalgojiya10@gmail.com>"
