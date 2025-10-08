@@ -2,7 +2,7 @@
 
 We take security seriously. Please follow this policy to report vulnerabilities in **setup-solr-action**.
 
-> Screenshot of security file location in the repo:
+> Security Tab Screenshot:
 
 ![Security Tab](https://raw.githubusercontent.com/DhavalGojiya/setup-solr-action/main/assets/images/security-tab.png)
 
