@@ -6,7 +6,6 @@ export default defineConfig({
   clean: true,
   entry: {
     index: "src/action.js", // Bundle src/action.js → dist/index.js
-    "state-helper": "src/state-helper.js", // Bundle src/state-helper.js → dist/state-helper.js
   },
   format: ["cjs"],
   minify: true,
