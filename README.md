@@ -156,7 +156,7 @@ Here’s a complete example workflow that:
 2. Runs Python tests (`pytest`).
 
 ```yaml
-name: Example Workflow with solr
+name: Example Workflow with Solr
 
 on:
   push:
@@ -169,7 +169,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
 
       - name: Setup Apache Solr Infrastructure
         uses: dhavalgojiya/setup-solr-action@v1
@@ -179,9 +179,9 @@ jobs:
           solr-custom-configset-path: "solr_configs/"
 
       - name: Setup Python
-        uses: actions/setup-python@v5
+        uses: actions/setup-python@v6
         with:
-          python-version: "3.12"
+          python-version: "3.x"
 
       - name: Install dependencies
         run: |
@@ -205,7 +205,7 @@ jobs:
 
 ## 🧪 Testing
 
-To test this GitHub Action locally, simply run:
+To test this GitHub Action locally, run:
 
 ```bash
 npm run act
