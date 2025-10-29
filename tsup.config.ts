@@ -9,6 +9,7 @@ export default defineConfig({
   },
   format: ["cjs"],
   minify: true,
+  noExternal: [/(.*)/],
   onSuccess: async () => {
     // Copy all helper scripts to dist/scripts/
     const src = resolve("src/scripts/");
