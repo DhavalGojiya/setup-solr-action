@@ -43,7 +43,7 @@ jobs:
       # 5. Run Lint & Formatting Check
       # -----------------------------
       - name: 🧹 Run Lint & Formatting Check
-        run: npx biome check .
+        run: npx @biomejs/biome ci --error-on-warnings
 
       # -----------------------------
       # 6. Build the Package
