@@ -57,6 +57,7 @@ jobs:
   solr-dev-test:
     runs-on: ubuntu-latest
     strategy:
+      fail-fast: false
       matrix:
         solr-version: ["7", "8", "9"]   # Matrix versions
     env:
