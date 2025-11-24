@@ -55,6 +55,7 @@ jobs:
   # Job 2: Test Custom Solr Action
   # -----------------------------
   solr-dev-test:
+    name: solr-dev-test (Solr ${{ matrix.solr-version }})
     runs-on: ubuntu-latest
     strategy:
       matrix:
