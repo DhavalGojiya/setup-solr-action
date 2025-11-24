@@ -58,7 +58,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        solr-version: ["8.9.0"]   # Matrix versions
+        solr-version: ["7", "8", "9"]   # Matrix versions
     env:
       SOLR_CORE: test_core
     steps:
