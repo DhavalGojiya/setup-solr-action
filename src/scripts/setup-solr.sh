@@ -68,7 +68,7 @@ done
 
 echo "✅ Solr core [$SOLR_CORE_NAME] is healthy!"
 
-docker exec $SOLR_CONTAINER solr --version && mkdir -p /var/solr/data
+docker exec $SOLR_CONTAINER bash -c "mkdir -p /var/solr/data && solr --version"
 
 # -----------------------------------------
 # Step 5: Copy solr custom configs if provided
