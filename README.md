@@ -152,7 +152,7 @@ This ensures your CI doesn’t hang indefinitely.
 
 Here’s a complete example workflow that:
 
-1. Sets up Solr with your action.
+1. Sets up Solr in your workflow using this action.
 2. Runs Python tests (`pytest`).
 
 ```yaml
