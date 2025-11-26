@@ -38,6 +38,11 @@ repos:
       - id: sort-simple-yaml
       - id: trailing-whitespace
 
+  - repo: https://github.com/biomejs/pre-commit
+    rev: v2.3.7
+    hooks:
+    -   id: biome-check
+
   - repo: https://github.com/codespell-project/codespell
     rev: v2.4.1
     hooks:
@@ -46,3 +51,11 @@ repos:
           - --ignore-words-list=nd
         additional_dependencies:
           - tomli
+
+  - repo: https://github.com/scop/pre-commit-shfmt
+    rev: v3.12.0-2
+    hooks:
+      - id: shfmt
+        args:
+          - --indent=4
+          - --write
