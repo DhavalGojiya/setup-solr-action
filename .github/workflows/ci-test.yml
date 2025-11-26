@@ -7,8 +7,18 @@ on:
     branches: [ "main" ]
 
 jobs:
+  # -----------------
+  # Job 1: Pre-commit
+  # -----------------
+  pre-commit:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+      - uses: pre-commit/action@v3.0.1
+      - uses: pre-commit-ci/lite-action@v1.1.0
+        if: always()
   # -----------------------------
-  # Job 1: Package Checks & Build
+  # Job 2: Package Checks & Build
   # -----------------------------
   package:
     runs-on: ubuntu-latest
@@ -90,7 +100,7 @@ jobs:
         run: |
           echo "Pinging Solr Core: ${SOLR_CORE}"
           RESPONSE=$(curl -s --fail "http://127.0.0.1:8983/solr/${SOLR_CORE}/admin/ping?wt=json")
-          
+
           if echo "$RESPONSE" | grep -q '"status":"OK"'; then
             echo "🎉 Solr is healthy and responding"
           else
