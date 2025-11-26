@@ -2,19 +2,21 @@
 set -e # Exit immediately if any command fails.
 
 # -------------------------------
-# Arguments
+# Input arguments
 # -------------------------------
 SOLR_VERSION="$1"               # Solr Docker image version (e.g., "8.9.0")
 SOLR_CORE_NAME="$2"             # Name of the Solr core to create
 SOLR_CUSTOM_CONFIGSET_PATH="$3" # Optional local config folder provided by user
 SOLR_HOST_PORT="${4:-8983}"     # Local host port for Solr (default: 8983)
-SOLR_CONTAINER_PORT=8983        # Port inside the container
 
-# Default Solr sample config set path
+# -------------------------------
+# Solr internal ports and container filesystem paths
+# -------------------------------
+SOLR_CONTAINER_PORT=8983
 SOLR_SAMPLE_TECHPRODUCTS_CONFDIR="/opt/solr/server/solr/configsets/sample_techproducts_configs"
-
-# Destination inside the container for Solr core config files
-CONTAINER_CONFDIR="/var/solr/data/$SOLR_CORE_NAME/conf"
+SOLR_CORES_BASE="/var/solr/data"
+SOLR_CORE_HOME="$SOLR_CORES_BASE/$SOLR_CORE_NAME"
+SOLR_CORE_CONF="$SOLR_CORE_HOME/conf"
 
 # -----------------------------------------
 # Step 1: Start Solr container
@@ -35,7 +37,36 @@ if [ -z "$SOLR_CONTAINER" ]; then
 fi
 
 # -----------------------------------------
-# Step 3: Save container ID into GitHub Actions state
+# Step 3: Detect full Solr version (major.minor.patch)
+# -----------------------------------------
+
+# Starting from Solr 9.8+, the correct command to get the Solr version is `solr --version`
+SOLR_VERSION_OUTPUT=$(docker exec "$SOLR_CONTAINER" solr --version 2>/dev/null || true)
+SOLR_VERSION_FULL=$(echo "$SOLR_VERSION_OUTPUT" | grep -oP '\d+\.\d+\.\d+' || true)
+
+# Fallback to the old Solr version checking style: `solr version`
+if [ -z "$SOLR_VERSION_FULL" ]; then
+    SOLR_VERSION_OUTPUT=$(docker exec "$SOLR_CONTAINER" solr version 2>/dev/null || true)
+    SOLR_VERSION_FULL=$(echo "$SOLR_VERSION_OUTPUT" | grep -oP '\d+\.\d+\.\d+' || true)
+fi
+
+# Extract major only (e.g. 8, 9, 10)
+SOLR_VERSION_MAJOR=$(echo "$SOLR_VERSION_FULL" | cut -d '.' -f 1)
+
+if [ -n "$SOLR_VERSION_FULL" ]; then
+    echo "┌───────────────────────────────────────────────────────"
+    echo "│ ✔ Solr version resolved"
+    echo "│ 🔍 DEBUG: Solr full version     → [$SOLR_VERSION_FULL]"
+    echo "│ 🔍 DEBUG: Solr major version    → [$SOLR_VERSION_MAJOR]"
+    echo "└───────────────────────────────────────────────────────"
+else
+    echo "┌──────────────────────────────────────────────"
+    echo "│ ✖ Failed to resolve Solr version"
+    echo "└──────────────────────────────────────────────"
+fi
+
+# -----------------------------------------
+# Step 4: Save container ID into GitHub Actions state
 # -----------------------------------------
 if [ -n "$GITHUB_STATE" ]; then
     if echo "SOLR_CONTAINER=$SOLR_CONTAINER" >>"$GITHUB_STATE"; then
@@ -46,7 +77,7 @@ if [ -n "$GITHUB_STATE" ]; then
 fi
 
 # -----------------------------------------
-# Step 4: Wait for Solr core to become ready
+# Step 5: Wait for Solr core to become ready
 # -----------------------------------------
 SOLR_CORE_PING_URL="http://127.0.0.1:$SOLR_HOST_PORT/solr/$SOLR_CORE_NAME/admin/ping?wt=json"
 
@@ -69,22 +100,22 @@ done
 echo "✅ Solr core [$SOLR_CORE_NAME] is healthy!"
 
 # -----------------------------------------
-# Step 5: Copy solr custom configs if provided
+# Step 6: Copy solr custom configs if provided
 # -----------------------------------------
 if [ -n "$SOLR_CUSTOM_CONFIGSET_PATH" ]; then
     echo "📦 Copying custom configs from '$SOLR_CUSTOM_CONFIGSET_PATH' to Solr core [$SOLR_CORE_NAME]... ⏳"
 
-    docker cp "$SOLR_CUSTOM_CONFIGSET_PATH/." $SOLR_CONTAINER:$CONTAINER_CONFDIR
+    docker cp "$SOLR_CUSTOM_CONFIGSET_PATH/." $SOLR_CONTAINER:$SOLR_CORE_CONF
 
     # Fix permissions to match Solr user inside the container
-    docker exec -u root $SOLR_CONTAINER chown -R solr:solr /var/solr/data/$SOLR_CORE_NAME
+    docker exec -u root $SOLR_CONTAINER chown -R solr:solr $SOLR_CORE_HOME
     echo "✅ Custom configs copied to Solr core [$SOLR_CORE_NAME] successfully"
 else
-    echo "⚠️ Skipping custom configs: Variable 'solr-custom-configset-path' is not set"
+    echo "⚠️ No custom config path provided — skipping (optional step)"
 fi
 
 # -----------------------------------------
-# Step 6: Reload the Solr core to pick up changes
+# Step 7: Reload the Solr core to pick up changes
 # -----------------------------------------
 SOLR_CORE_RELOAD_URL="http://127.0.0.1:$SOLR_HOST_PORT/solr/admin/cores?action=RELOAD&core=$SOLR_CORE_NAME"
 
@@ -103,3 +134,5 @@ else
     echo "$BODY"
     exit 1
 fi
+
+echo "✨ Solr $SOLR_VERSION_FULL on port $SOLR_HOST_PORT is set up successfully!"
