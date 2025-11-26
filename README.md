@@ -4,7 +4,7 @@
   <img src="https://raw.githubusercontent.com/DhavalGojiya/setup-solr-action/main/assets/images/project-logo.png" width="90%" alt="Project Apache Solr Logo"/>
 </p>
 
-Easily spin up an [Apache Solr](https://solr.apache.org/) instance inside your **GitHub Actions CI** pipeline.  
+Easily spin up an [Apache Solr](https://solr.apache.org/) instance inside your **GitHub Actions CI** pipeline.
 This action makes it simple to provision Solr during your tests or builds, without needing complex manual setup.
 
 It will:
@@ -223,14 +223,14 @@ This will simulate your workflow on your local machine using [act](https://githu
 
 ## 🤝 Contributing
 
-Want to improve this project? Contributions are welcome!  
+Want to improve this project? Contributions are welcome!
 Please check out the [Contributing Guide](./CONTRIBUTING.md) for details.
 
 ---
 
 ## 👨‍💻 About the Author
 
-Hi, I’m **Dhaval Gojiya** — a passionate **Software Engineer** and also a **Farmer** 🌱.  
+Hi, I’m **Dhaval Gojiya** — a passionate **Software Engineer** and also a **Farmer** 🌱.
 I love building open-source tools that simplify workflows, while staying curious and grounded in both tech and nature.
 
 ---
