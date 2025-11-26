@@ -135,4 +135,4 @@ else
     exit 1
 fi
 
-echo "✨ Solr setup completed successfully!"
+echo "✨ Solr $SOLR_VERSION_FULL on port $SOLR_HOST_PORT is set up successfully!"

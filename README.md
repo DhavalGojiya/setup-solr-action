@@ -44,7 +44,7 @@ Add this step to your workflow for a **basic setup**:
 - name: Setup Apache Solr Infrastructure
   uses: dhavalgojiya/setup-solr-action@v1
   with:
-    solr-version: "8.9.0"
+    solr-version: "9.10.0"
     solr-core-name: "my_test_core"
 ```
 
@@ -54,7 +54,7 @@ Run Solr on a **different port**:
 - name: Setup Apache Solr Infrastructure
   uses: dhavalgojiya/setup-solr-action@v1
   with:
-    solr-version: "8.9.0"
+    solr-version: "9.10.0"
     solr-core-name: "my_test_core"
     solr-port: "9011"
 ```
@@ -65,7 +65,7 @@ Provide a **custom configset** (e.g., your own `schema.xml` and `solrconfig.xml`
 - name: Setup Apache Solr Infrastructure
   uses: dhavalgojiya/setup-solr-action@v1
   with:
-    solr-version: "8.9.0"
+    solr-version: "9.10.0"
     solr-core-name: "my_test_core"
     solr-custom-configset-path: "solr_configs/" # Path must be relative to repo root
 ```
@@ -76,7 +76,7 @@ Provide a **custom configset** (e.g., your own `schema.xml` and `solrconfig.xml`
 
 | Name                         | Required | Default | Description                                                                                              |
 | ---------------------------- | -------- | ------- | -------------------------------------------------------------------------------------------------------- |
-| `solr-version`               | ✅ Yes   | —       | The Solr Docker image version to use (e.g., `9.6.1`, `8.9.0-slim`).                                      |
+| `solr-version`               | ✅ Yes   | —       | The Solr Docker image version to use (e.g., `9.9.0`, `9.10.0`, `9.10.0-slim`).                           |
 | `solr-core-name`             | ✅ Yes   | —       | The name of the Solr core to create.                                                                     |
 | `solr-custom-configset-path` | ❌ No    | —       | Path to a folder containing your custom Solr configset (e.g., schema.xml, solrconfig.xml, synonyms.txt). |
 | `solr-port`                  | ❌ No    | `8983`  | Host port on which Solr will be accessible (maps to container port `8983`).                              |
@@ -121,7 +121,7 @@ solr_configs/
 - name: Setup Apache Solr with custom configset
   uses: dhavalgojiya/setup-solr-action@v1
   with:
-    solr-version: "8.9.0"
+    solr-version: "9.10.0"
     solr-core-name: "my_project_core"
     solr-custom-configset-path: "solr_configs/" # relative to repo root
 ```
@@ -136,10 +136,16 @@ As a result, the Solr instance in your GitHub CI will behave just like your prod
 The action provides clear and emoji-friendly logging to help you follow what’s happening:
 
 ```
-🚀 Solr version: 8.9.0
+🚀 Solr version: 9.10.0
 🗂️ Solr Core name: test_core
 🔌 Solr host port: 8983
 🛠️ Solr Custom configset path: /home/runner/work/<REPO>/<REPO>/solr_configs
+┌───────────────────────────────────────────────────────
+│ ✔ Solr version resolved
+│ 🔍 DEBUG: Solr full version     → [9.10.0]
+│ 🔍 DEBUG: Solr major version    → [9]
+└───────────────────────────────────────────────────────
+⏳ Waiting for Solr core [test_core] to become healthy...
 ✅ Solr core [test_core] is healthy!
 ```
 
@@ -169,12 +175,12 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v5
+        uses: actions/checkout@v6
 
       - name: Setup Apache Solr Infrastructure
         uses: dhavalgojiya/setup-solr-action@v1
         with:
-          solr-version: "8.9.0"
+          solr-version: "9.10.0"
           solr-core-name: "products_core"
           solr-custom-configset-path: "solr_configs/"
 
