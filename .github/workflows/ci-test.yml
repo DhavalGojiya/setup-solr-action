@@ -7,27 +7,43 @@ on:
     branches: [ "main" ]
 
 jobs:
-  # -----------------
+  # -----------------------------
   # Job 1: Pre-commit
-  # -----------------
+  # -----------------------------
   pre-commit:
     runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v6
-      - uses: pre-commit/action@v3.0.1
-      - uses: pre-commit-ci/lite-action@v1.1.0
-        if: always()
-  # -----------------------------
-  # Job 2: Package Checks & Build
-  # -----------------------------
-  package:
-    runs-on: ubuntu-latest
+    permissions:
+      contents: read
     steps:
       # -----------------------------
       # 1. Checkout Repository
       # -----------------------------
       - name: 📥 Checkout Repository
         uses: actions/checkout@v6
+        with:
+          persist-credentials: false
+
+      # -----------------------------
+      # 2. Run Pre-commit hooks
+      # -----------------------------
+      - name: 🧹 Run Pre-commit hooks
+        uses: pre-commit/action@v3.0.1
+
+  # -----------------------------
+  # Job 2: Package Checks & Build
+  # -----------------------------
+  package:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      # -----------------------------
+      # 1. Checkout Repository
+      # -----------------------------
+      - name: 📥 Checkout Repository
+        uses: actions/checkout@v6
+        with:
+          persist-credentials: false
 
       # -----------------------------
       # 2. Setup Node.js
@@ -62,11 +78,13 @@ jobs:
         run: npm run build
 
   # -----------------------------
-  # Job 2: Test Custom Solr Action
+  # Job 3: Test Custom Solr Action
   # -----------------------------
   solr-dev-test:
     name: solr-dev-test (Solr ${{ matrix.solr-version }})
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
     strategy:
       matrix:
         include:
@@ -82,6 +100,8 @@ jobs:
       # -----------------------------
       - name: 📥 Checkout Repository
         uses: actions/checkout@v6
+        with:
+          persist-credentials: false
 
       # -----------------------------
       # 2. Setup Apache Solr (Local Action)

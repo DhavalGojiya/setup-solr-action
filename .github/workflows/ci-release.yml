@@ -6,9 +6,14 @@ on:
       - "v[0-9]"   # Major version release (e.g., v1, v2, ..., v9)
 
 jobs:
+  # -----------------------------
+  # Job 1: Solr Release Test
+  # -----------------------------
   solr-release-test:
     name: solr-release-test (Solr ${{ matrix.solr-version }})
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
     strategy:
       matrix:
         include:
@@ -24,6 +29,8 @@ jobs:
       # -----------------------------
       - name: 📥 Checkout Repository
         uses: actions/checkout@v6
+        with:
+          persist-credentials: false
 
       # -----------------------------
       # 2. Setup Apache Solr (Release Action)
