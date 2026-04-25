@@ -19,7 +19,7 @@ jobs:
       # 1. Checkout Repository
       # -----------------------------
       - name: 📥 Checkout Repository
-        uses: actions/checkout@v6
+        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6
         with:
           persist-credentials: false
 
@@ -27,7 +27,7 @@ jobs:
       # 2. Run Pre-commit hooks
       # -----------------------------
       - name: 🧹 Run Pre-commit hooks
-        uses: pre-commit/action@v3.0.1
+        uses: pre-commit/action@2c7b3805fd2a0fd8c1884dcaebf91fc102a13ecd # v3.0.1
 
   # -----------------------------
   # Job 2: Package Checks & Build
@@ -41,7 +41,7 @@ jobs:
       # 1. Checkout Repository
       # -----------------------------
       - name: 📥 Checkout Repository
-        uses: actions/checkout@v6
+        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6
         with:
           persist-credentials: false
 
@@ -49,7 +49,7 @@ jobs:
       # 2. Setup Node.js
       # -----------------------------
       - name: ⚙️ Setup Node.js
-        uses: actions/setup-node@v6
+        uses: actions/setup-node@53b83947a5a98c8d113130e565377fae1a50d02f # v6
         with:
           node-version: "20"
 
@@ -101,7 +101,7 @@ jobs:
       # 1. Checkout Repository
       # -----------------------------
       - name: 📥 Checkout Repository
-        uses: actions/checkout@v6
+        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6
         with:
           persist-credentials: false
 
