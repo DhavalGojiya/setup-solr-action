@@ -89,11 +89,11 @@ jobs:
       matrix:
         include:
           - solr-version: "8"
-            configset: "tests/fixtures/solr_configs/8.x.x"
+            configset: "tests/solr_configs/8.x.x"
           - solr-version: "9"
-            configset: "tests/fixtures/solr_configs/9.x.x"
+            configset: "tests/solr_configs/9.x.x"
           - solr-version: "10"
-            configset: "tests/fixtures/solr_configs/10.x.x"
+            configset: "tests/solr_configs/10.x.x"
     env:
       SOLR_CORE: test_core
     steps:
