@@ -3,7 +3,7 @@ name: Test Solr Action Release
 on:
   push:
     tags:
-      - "v[0-9]"   # Major version release (e.g., v1, v2, ..., v9)
+      - "v[0-9]"   # Major version tag release (e.g., v1, v2, ..., v9)
 
 jobs:
   # -----------------------------
