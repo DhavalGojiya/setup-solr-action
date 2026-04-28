@@ -22,5 +22,5 @@ export default defineConfig({
   },
   outDir: "dist",
   shims: false,
-  target: "node20",
+  target: "node24",
 });
