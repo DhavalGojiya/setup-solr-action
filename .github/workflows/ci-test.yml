@@ -52,6 +52,8 @@ jobs:
         uses: actions/setup-node@48b55a011bda9f5d6aeb4c2d9c7362e8dae4041e # v6
         with:
           node-version: "24"
+          cache: "npm"
+          cache-dependency-path: "**/package-lock.json"
 
       # -----------------------------
       # 3. Check package-lock.json is up-to-date
@@ -95,7 +97,7 @@ jobs:
           - solr-version: "10"
             configset: "tests/solr_configs/10.x.x"
     env:
-      SOLR_CORE: test_core
+      SOLR_CORE_NAME: test_core
     steps:
       # -----------------------------
       # 1. Checkout Repository
@@ -112,7 +114,7 @@ jobs:
         uses: ./   # Use local action.yml
         with:
           solr-version: ${{ matrix.solr-version }}
-          solr-core-name: ${{ env.SOLR_CORE }}
+          solr-core-name: ${{ env.SOLR_CORE_NAME }}
           solr-custom-configset-path: ${{ matrix.configset }}
 
       # -----------------------------
@@ -120,8 +122,8 @@ jobs:
       # -----------------------------
       - name: ✅ Verify Solr Health
         run: |
-          echo "Pinging Solr Core: ${SOLR_CORE}"
-          RESPONSE=$(curl -s --fail "http://127.0.0.1:8983/solr/${SOLR_CORE}/admin/ping?wt=json")
+          echo "Pinging Solr Core: ${SOLR_CORE_NAME}"
+          RESPONSE=$(curl -s --fail "http://127.0.0.1:8983/solr/${SOLR_CORE_NAME}/admin/ping?wt=json")
 
           if echo "$RESPONSE" | grep -q '"status":"OK"'; then
             echo "🎉 Solr is healthy and responding"
