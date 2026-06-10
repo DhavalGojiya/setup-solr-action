@@ -16,25 +16,25 @@ It will:
 - ✅ Simplifies Solr setup in CI
 - ✅ Lets you focus on testing, not infrastructure
 
----
+______________________________________________________________________
 
 ## 📑 Table of Contents
 
 - [⚡ Setup Apache Solr (GitHub Action)](#-setup-apache-solr-github-action)
   - [📑 Table of Contents](#-table-of-contents)
   - [🚀 Usage](#-usage)
-  - [⚙️ Inputs](#️-inputs)
+  - [⚙️ Inputs](#%EF%B8%8F-inputs)
   - [📂 Example: Custom Configset](#-example-custom-configset)
     - [How to Use in This Action](#how-to-use-in-this-action)
-  - [🔎 Debugging \& Logs](#-debugging--logs)
-  - [🛠️ Example Workflow](#️-example-workflow)
+  - [🔎 Debugging & Logs](#-debugging--logs)
+  - [🛠️ Example Workflow](#%EF%B8%8F-example-workflow)
   - [💡 Why use this action?](#-why-use-this-action)
   - [🧪 Testing](#-testing)
   - [🤝 Contributing](#-contributing)
-  - [👨‍💻 About the Author](#-about-the-author)
+  - [👨‍💻 About the Author](#%E2%80%8D-about-the-author)
   - [📜 License](#-license)
 
----
+______________________________________________________________________
 
 ## 🚀 Usage
 
@@ -70,7 +70,7 @@ Provide a **custom configset** (e.g., your own `schema.xml` and `solrconfig.xml`
     solr-custom-configset-path: "solr_configs/" # Path must be relative to repo root
 ```
 
----
+______________________________________________________________________
 
 ## ⚙️ Inputs
 
@@ -81,7 +81,7 @@ Provide a **custom configset** (e.g., your own `schema.xml` and `solrconfig.xml`
 | `solr-custom-configset-path` | ❌ No    | —       | Path to a folder containing your custom Solr configset (e.g., schema.xml, solrconfig.xml, synonyms.txt). |
 | `solr-port`                  | ❌ No    | `8983`  | Host port on which Solr will be accessible (maps to container port `8983`).                              |
 
----
+______________________________________________________________________
 
 ## 📂 Example: Custom Configset
 
@@ -102,7 +102,7 @@ Typical files inside a custom configset include:
 
 - Other optional files like **`stopwords.txt`**, **`protwords.txt`**, etc. depending on your project’s search needs.
 
----
+______________________________________________________________________
 
 ### How to Use in This Action
 
@@ -129,7 +129,7 @@ solr_configs/
 This ensures your **custom schema, configs, and search enhancements** are automatically copied into the Solr core during setup.
 As a result, the Solr instance in your GitHub CI will behave just like your production or development Solr, making tests more realistic and reliable.
 
----
+______________________________________________________________________
 
 ## 🔎 Debugging & Logs
 
@@ -152,7 +152,7 @@ The action provides clear and emoji-friendly logging to help you follow what’s
 If Solr fails to become healthy within **30 seconds** (configurable by retry logic in the script), the action will stop and exit with an error.
 This ensures your CI doesn’t hang indefinitely.
 
----
+______________________________________________________________________
 
 ## 🛠️ Example Workflow
 
@@ -198,7 +198,7 @@ jobs:
         run: pytest -v products/tests/test_solr_product_apis.py
 ```
 
----
+______________________________________________________________________
 
 ## 💡 Why use this action?
 
@@ -207,7 +207,7 @@ jobs:
 - Works seamlessly with your own **custom Solr schemas/configsets**.
 - Great for integration tests that depend on a running Solr core.
 
----
+______________________________________________________________________
 
 ## 🧪 Testing
 
@@ -219,21 +219,21 @@ npm run act
 
 This will simulate your workflow on your local machine using [act](https://github.com/nektos/act).
 
----
+______________________________________________________________________
 
 ## 🤝 Contributing
 
 Want to improve this project? Contributions are welcome!
 Please check out the [Contributing Guide](./CONTRIBUTING.md) for details.
 
----
+______________________________________________________________________
 
 ## 👨‍💻 About the Author
 
 Hi, I’m **Dhaval Gojiya** — a passionate **Software Engineer** and also a **Farmer** 🌱.
 I love building open-source tools that simplify workflows, while staying curious and grounded in both tech and nature.
 
----
+______________________________________________________________________
 
 ## 📜 License
 
