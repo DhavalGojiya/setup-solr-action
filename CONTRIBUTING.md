@@ -3,14 +3,14 @@
 First off, thank you for considering contributing to **setup-solr-action** 🎉.
 Contributions, issues, and feature requests are welcome!
 
----
+______________________________________________________________________
 
 ## 📑 Table of Contents
 
 - [🤝 Contributing to setup-solr-action](#-contributing-to-setup-solr-action)
   - [📑 Table of Contents](#-table-of-contents)
-  - [🛠️ Getting Started](#️-getting-started)
-  - [🧹 Code Quality (Linting \& Formatting)](#-code-quality-linting--formatting)
+  - [🛠️ Getting Started](#%EF%B8%8F-getting-started)
+  - [🧹 Code Quality (Linting & Formatting)](#-code-quality-linting--formatting)
   - [📦 Build](#-build)
   - [⚡ All-in-One Command](#-all-in-one-command)
   - [🧪 Testing Locally](#-testing-locally)
@@ -18,7 +18,7 @@ Contributions, issues, and feature requests are welcome!
   - [📜 Guidelines](#-guidelines)
   - [🙌 Thank You](#-thank-you)
 
----
+______________________________________________________________________
 
 ## 🛠️ Getting Started
 
@@ -38,7 +38,7 @@ Contributions, issues, and feature requests are welcome!
 
    This will set up all required packages defined in `package-lock.json` for development.
 
----
+______________________________________________________________________
 
 ## 🧹 Code Quality (Linting & Formatting)
 
@@ -58,7 +58,7 @@ We use [Biome](https://biomejs.dev/) for linting and formatting, along with [shf
   npm run format:sh
   ```
 
----
+______________________________________________________________________
 
 ## 📦 Build
 
@@ -73,7 +73,7 @@ This compiles the source code into a distributable format inside the **`dist/`**
 
   After running this, the final output can be found in `dist/`.
 
----
+______________________________________________________________________
 
 ## ⚡ All-in-One Command
 
@@ -85,7 +85,7 @@ npm run all
 
 This ensures your environment is clean and ready for contribution.
 
----
+______________________________________________________________________
 
 ## 🧪 Testing Locally
 
@@ -97,11 +97,11 @@ npm run act
 
 This will run the action in a local environment, useful before pushing changes.
 
----
+______________________________________________________________________
 
 ## 📥 Submitting a Pull Request
 
-1.  **Create a new branch from `main`** for your work (don’t work directly on `main`):
+1. **Create a new branch from `main`** for your work (don’t work directly on `main`):
 
 ```bash
 git checkout -b feature/add-xyz
@@ -132,7 +132,7 @@ git checkout -b docs/improve-readme
    - If it’s a new feature, provide usage examples.
    - If possible, add/update tests to cover your changes.
 
----
+______________________________________________________________________
 
 ## 📜 Guidelines
 
@@ -141,7 +141,7 @@ git checkout -b docs/improve-readme
 - Update documentation (README, comments) if you change behavior.
 - Pull requests should be small and focused.
 
----
+______________________________________________________________________
 
 ## 🙌 Thank You
 
