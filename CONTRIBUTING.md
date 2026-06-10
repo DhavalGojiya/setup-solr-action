@@ -30,7 +30,15 @@ ______________________________________________________________________
    cd setup-solr-action
 ```
 
-3. Install project dependencies:
+3. **Use the supported Node.js version (currently Node.js 24).** This project pins the required **Node.js** version in [`.nvmrc`](.nvmrc) (this is the Node.js runtime version, not npm or nvm). If you use [nvm](https://github.com/nvm-sh/nvm), just run the following inside the project directory to switch to the correct Node.js version:
+
+   ```bash
+   nvm use
+   ```
+
+   > 💡 If Node.js 24 isn't installed yet, just run `nvm install` — it reads `.nvmrc`, installs the correct Node.js version, and switches to it automatically.
+
+4. Install project dependencies:
 
    ```bash
    npm install
@@ -111,10 +119,13 @@ git checkout -b docs/improve-readme
 
 > Branch names should follow the format: <br> > `feature/...` → new features <br> > `fix/...` → bug fixes <br> > `docs/...` → documentation updates
 
-2. **Make your changes** and commit with a clear message:
+2. **Make your changes** and commit with a clear message.
+
+   We follow the [Conventional Commits](https://www.conventionalcommits.org/) format: `type(scope): short description`, where `scope` is optional.
 
    ```bash
    git commit -m "fix: correct Solr port mapping issue"
+   git commit -m "feat(solr): add support for custom Solr cores"
    ```
 
 3. **Push your branch** to your fork:
