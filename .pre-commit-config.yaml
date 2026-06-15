@@ -3,9 +3,7 @@
 # To enable these pre-commit hooks run:
 # `uv tool install pre-commit` or `brew install pre-commit`
 # Then in the project root directory run `pre-commit install`
-
 exclude: dist/
-
 repos:
   - repo: https://github.com/pre-commit/pre-commit-hooks
     rev: v6.0.0
@@ -39,9 +37,9 @@ repos:
       - id: trailing-whitespace
 
   - repo: https://github.com/biomejs/pre-commit
-    rev: v2.4.16
+    rev: v2.5.0
     hooks:
-    -   id: biome-check
+      - id: biome-check
 
   - repo: https://github.com/codespell-project/codespell
     rev: v2.4.2
@@ -60,6 +58,16 @@ repos:
           - --indent=4
           - --write
 
+  - repo: https://github.com/shellcheck-py/shellcheck-py
+    rev: v0.11.0.1
+    hooks:
+      - id: shellcheck
+
+  - repo: https://github.com/rhysd/actionlint
+    rev: v1.7.12
+    hooks:
+      - id: actionlint
+
   - repo: https://github.com/hukkin/mdformat
     rev: 1.0.0
     hooks:
@@ -68,3 +76,8 @@ repos:
           - --number
         additional_dependencies:
           - mdformat-gfm
+
+  - repo: https://github.com/google/yamlfmt
+    rev: v0.21.0
+    hooks:
+      - id: yamlfmt
