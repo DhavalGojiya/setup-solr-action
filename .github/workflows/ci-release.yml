@@ -3,7 +3,7 @@ name: Test Solr Action Release
 on:
   push:
     tags:
-      - "v[0-9]"   # Major version tag release (e.g., v1, v2, ..., v9)
+      - "v[0-9]"  # Major version tag release (e.g., v1, v2, ..., v9)
 
 jobs:
   # -----------------------------
@@ -30,7 +30,7 @@ jobs:
       # 1. Checkout Repository
       # -----------------------------
       - name: 📥 Checkout Repository
-        uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10 # v6.0.3
+        uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10  # v6.0.3
         with:
           persist-credentials: false
 

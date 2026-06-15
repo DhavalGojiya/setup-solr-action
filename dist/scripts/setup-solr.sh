@@ -23,13 +23,13 @@ SOLR_CORE_CONF="$SOLR_CORE_HOME/conf"
 # -----------------------------------------
 echo "🚀 Starting Solr container on host port $SOLR_HOST_PORT... ⏳"
 docker run -d \
-    -p $SOLR_HOST_PORT:$SOLR_CONTAINER_PORT \
-    solr:$SOLR_VERSION solr-precreate "$SOLR_CORE_NAME" $SOLR_SAMPLE_TECHPRODUCTS_CONFDIR
+    -p "$SOLR_HOST_PORT":"$SOLR_CONTAINER_PORT" \
+    solr:"$SOLR_VERSION" solr-precreate "$SOLR_CORE_NAME" "$SOLR_SAMPLE_TECHPRODUCTS_CONFDIR"
 
 # -----------------------------------------
 # Step 2: Get running container ID
 # -----------------------------------------
-SOLR_CONTAINER=$(docker ps -f ancestor=solr:$SOLR_VERSION --format '{{.ID}}' | head -n1)
+SOLR_CONTAINER=$(docker ps -f ancestor=solr:"$SOLR_VERSION" --format '{{.ID}}' | head -n1)
 
 if [ -z "$SOLR_CONTAINER" ]; then
     echo "❌ No running Solr container found for solr:$SOLR_VERSION"
@@ -105,10 +105,10 @@ echo "✅ Solr core [$SOLR_CORE_NAME] is healthy!"
 if [ -n "$SOLR_CUSTOM_CONFIGSET_PATH" ]; then
     echo "📦 Copying custom configs from '$SOLR_CUSTOM_CONFIGSET_PATH' to Solr core [$SOLR_CORE_NAME]... ⏳"
 
-    docker cp "$SOLR_CUSTOM_CONFIGSET_PATH/." $SOLR_CONTAINER:$SOLR_CORE_CONF
+    docker cp "$SOLR_CUSTOM_CONFIGSET_PATH/." "$SOLR_CONTAINER":"$SOLR_CORE_CONF"
 
     # Fix permissions to match Solr user inside the container
-    docker exec -u root $SOLR_CONTAINER chown -R solr:solr $SOLR_CORE_HOME
+    docker exec -u root "$SOLR_CONTAINER" chown -R solr:solr "$SOLR_CORE_HOME"
     echo "✅ Custom configs copied to Solr core [$SOLR_CORE_NAME] successfully"
 else
     echo "⚠️ No custom config path provided — skipping (optional step)"
