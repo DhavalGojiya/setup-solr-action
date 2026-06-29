@@ -38,7 +38,8 @@ jobs:
       # 2. Setup Apache Solr (Release Action)
       # -----------------------------
       - name: ⚡ Setup Apache Solr Infrastructure (Release)
-        uses: dhavalgojiya/setup-solr-action@v1
+        # Release smoke-test must track the published v1 tag, not a pinned SHA
+        uses: dhavalgojiya/setup-solr-action@v1  # zizmor: ignore[unpinned-uses]
         with:
           solr-version: ${{ matrix.solr-version }}
           solr-core-name: ${{ env.SOLR_CORE_NAME }}

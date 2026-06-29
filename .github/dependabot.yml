@@ -9,5 +9,7 @@ updates:
       github-actions:
         patterns:
           - "*"  # Group all Actions updates into a single larger pull request
+    cooldown:
+      default-days: 7  # Wait for newly released versions to settle before opening a PR (supply-chain hygiene)
     schedule:
       interval: weekly

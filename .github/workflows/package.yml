@@ -1,0 +1,79 @@
+name: Package & Build
+
+on:
+  push:
+    branches: ["main"]
+  pull_request:
+    branches: ["main"]
+
+# Cancel in-progress runs for the same ref to save CI minutes
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
+jobs:
+  # -----------------------------
+  # Job: Package Checks & Build
+  # -----------------------------
+  package:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      # -----------------------------
+      # 1. Checkout Repository
+      # -----------------------------
+      - name: 📥 Checkout Repository
+        uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0  # v7.0.0
+        with:
+          persist-credentials: false
+
+      # -----------------------------
+      # 2. Setup Node.js
+      # -----------------------------
+      - name: ⚙️ Setup Node.js
+        uses: actions/setup-node@48b55a011bda9f5d6aeb4c2d9c7362e8dae4041e  # v6.4.0
+        with:
+          node-version: "24"
+          cache: "npm"
+          cache-dependency-path: "**/package-lock.json"
+
+      # -----------------------------
+      # 3. Check package-lock.json is up-to-date
+      # -----------------------------
+      - name: 🔒 Check package-lock.json Sync
+        run: npx --yes package-lock-utd@1.1.3
+
+      # -----------------------------
+      # 4. Install Dependencies
+      # -----------------------------
+      - name: 📦 Install Dependencies
+        run: npm ci
+
+      # -----------------------------
+      # 5. Run Lint & Formatting Check
+      # -----------------------------
+      - name: 🧹 Run Lint & Formatting Check
+        run: npx @biomejs/biome ci --error-on-warnings
+
+      # -----------------------------
+      # 6. Build the Package
+      # -----------------------------
+      - name: 🏗️ Run Build
+        run: npm run build
+
+      # -----------------------------
+      # 7. Verify committed dist/ is up-to-date
+      # -----------------------------
+      - name: 🔍 Verify dist/ is up-to-date
+        run: |
+          # --porcelain catches modified, deleted, AND newly added untracked files
+          CHANGES=$(git status --porcelain -- dist/)
+          if [ -n "$CHANGES" ]; then
+            echo "❌ dist/ is out of date. Run 'npm run build' and commit the result."
+            echo "$CHANGES"
+            exit 1
+          fi
+          echo "✅ dist/ is up-to-date"
