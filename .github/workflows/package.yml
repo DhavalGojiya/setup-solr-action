@@ -69,8 +69,11 @@ jobs:
       # -----------------------------
       - name: 🔍 Verify dist/ is up-to-date
         run: |
-          if ! git diff --exit-code --stat -- dist/; then
+          # --porcelain catches modified, deleted, AND newly added untracked files
+          CHANGES=$(git status --porcelain -- dist/)
+          if [ -n "$CHANGES" ]; then
             echo "❌ dist/ is out of date. Run 'npm run build' and commit the result."
+            echo "$CHANGES"
             exit 1
           fi
           echo "✅ dist/ is up-to-date"
