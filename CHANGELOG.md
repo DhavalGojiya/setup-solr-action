@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.2.0] - 2026-06-29
+
 ### 🚀 Features
 
 - Add caching to the `setup-node` action (#47)
@@ -17,8 +19,17 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Fix typos discovered by codespell in Solr schema files (#40)
 
+### 📝 Documentation
+
+- Clarify Node.js version setup and commit conventions in CONTRIBUTING (#53)
+- Add `CHANGELOG.md` (#51)
+
 ### 🧰 Maintenance
 
+- Refactor CI workflows for improved structure and security (#56)
+- Bump `actions/checkout` in the github-actions group (#55)
+- Add shellcheck, actionlint, and yamlfmt pre-commit hooks (#54)
+- Add mdformat pre-commit hook and reformat markdown (#52)
 - Update pre-commit hook versions (#50)
 - Add `.nvmrc` to pin Node version for contributors (#49)
 - Bump `actions/checkout` from 6.0.2 to 6.0.3 (#48)
