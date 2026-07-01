@@ -1,8 +1,11 @@
-# Learn more about this config here: https://pre-commit.com/
+# Hooks are run with prek (https://prek.j178.dev/), a drop-in replacement for
+# pre-commit that reuses this same .pre-commit-config.yaml file.
+# Unlike pre-commit (written in Python), prek is written in Rust and ships as a
+# single dependency-free binary for faster, simpler installs.
 
-# To enable these pre-commit hooks run:
-# `uv tool install pre-commit` or `brew install pre-commit`
-# Then in the project root directory run `pre-commit install`
+# To enable these hooks run:
+# `uv tool install prek` or `brew install prek`
+# Then in the project root directory run `prek install`
 exclude: dist/
 repos:
   - repo: https://github.com/pre-commit/pre-commit-hooks
