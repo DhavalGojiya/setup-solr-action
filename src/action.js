@@ -1,7 +1,7 @@
-const core = require("@actions/core");
-const exec = require("@actions/exec");
-const path = require("node:path");
-const { IsPost } = require("./state-helper");
+import path from "node:path";
+import * as core from "@actions/core";
+import * as exec from "@actions/exec";
+import { IsPost } from "./state-helper.js";
 
 /**
  * Main function for the GitHub Action
