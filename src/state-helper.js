@@ -1,5 +1,5 @@
 // state-helper.js
-const core = require("@actions/core");
+import * as core from "@actions/core";
 
 /**
  * Indicates whether the POST action is running
@@ -12,6 +12,4 @@ if (!IsPost) {
   core.saveState("isPost", "true");
 }
 
-module.exports = {
-  IsPost,
-};
+export { IsPost };
