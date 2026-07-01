@@ -1,4 +1,4 @@
-name: Pre-commit
+name: Prek
 
 on:
   push:
@@ -16,9 +16,9 @@ permissions:
 
 jobs:
   # -----------------------------
-  # Job: Pre-commit
+  # Job: Prek
   # -----------------------------
-  pre-commit:
+  prek:
     runs-on: ubuntu-latest
     timeout-minutes: 10
     steps:
@@ -31,7 +31,7 @@ jobs:
           persist-credentials: false
 
       # -----------------------------
-      # 2. Run Pre-commit hooks
+      # 2. Run prek hooks
       # -----------------------------
-      - name: 🧹 Run Pre-commit hooks
-        uses: pre-commit/action@2c7b3805fd2a0fd8c1884dcaebf91fc102a13ecd  # v3.0.1
+      - name: 🧹 Run prek hooks
+        uses: j178/prek-action@e98a699c41eb69ab013a45817a0406469a748f8d  # v2.0.5

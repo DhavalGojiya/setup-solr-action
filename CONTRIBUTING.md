@@ -11,6 +11,7 @@ ______________________________________________________________________
   - [📑 Table of Contents](#-table-of-contents)
   - [🛠️ Getting Started](#%EF%B8%8F-getting-started)
   - [🧹 Code Quality (Linting & Formatting)](#-code-quality-linting--formatting)
+  - [🪝 Git Hooks (prek)](#-git-hooks-prek)
   - [📦 Build](#-build)
   - [⚡ All-in-One Command](#-all-in-one-command)
   - [🧪 Testing Locally](#-testing-locally)
@@ -65,6 +66,38 @@ We use [Biome](https://biomejs.dev/) for linting and formatting, along with [shf
   ```bash
   npm run format:sh
   ```
+
+______________________________________________________________________
+
+## 🪝 Git Hooks (prek)
+
+We use [prek](https://prek.j178.dev/) to run our Git hooks. prek is a drop-in
+replacement for [pre-commit](https://pre-commit.com/) that reuses the same
+[`.pre-commit-config.yaml`](.pre-commit-config.yaml). Unlike pre-commit (written
+in Python), prek is written in Rust and ships as a single dependency-free binary
+for faster, simpler installs.
+
+- Install prek:
+
+  ```bash
+  uv tool install prek   # or: brew install prek
+  ```
+
+- Enable the hooks in your local clone:
+
+  ```bash
+  prek install
+  ```
+
+  The hooks now run automatically on every `git commit`.
+
+- Run all hooks against the whole repository manually:
+
+  ```bash
+  prek run --all-files
+  ```
+
+  > The same hooks run in CI, so running them locally helps you catch issues before pushing.
 
 ______________________________________________________________________
 
