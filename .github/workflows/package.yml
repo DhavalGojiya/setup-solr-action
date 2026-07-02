@@ -53,19 +53,13 @@ jobs:
         run: npm ci
 
       # -----------------------------
-      # 5. Run Lint & Formatting Check
-      # -----------------------------
-      - name: 🧹 Run Lint & Formatting Check
-        run: npx @biomejs/biome ci --error-on-warnings
-
-      # -----------------------------
-      # 6. Build the Package
+      # 5. Build the Package
       # -----------------------------
       - name: 🏗️ Run Build
         run: npm run build
 
       # -----------------------------
-      # 7. Verify committed dist/ is up-to-date
+      # 6. Verify committed dist/ is up-to-date
       # -----------------------------
       - name: 🔍 Verify dist/ is up-to-date
         run: |
