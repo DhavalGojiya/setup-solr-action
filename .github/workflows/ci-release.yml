@@ -1,4 +1,4 @@
-name: Test Solr Action Release
+name: Release Test
 
 on:
   push:
@@ -6,11 +6,8 @@ on:
       - "v[0-9]"  # Major version tag release (e.g., v1, v2, ..., v9)
 
 jobs:
-  # -----------------------------
-  # Job 1: Solr Release Test
-  # -----------------------------
   solr-release-test:
-    name: solr-release-test (Solr ${{ matrix.solr-version }})
+    name: Solr ${{ matrix.solr-version }}
     runs-on: ubuntu-latest
     permissions:
       contents: read
@@ -26,18 +23,12 @@ jobs:
     env:
       SOLR_CORE_NAME: test_core
     steps:
-      # -----------------------------
-      # 1. Checkout Repository
-      # -----------------------------
-      - name: 📥 Checkout Repository
+      - name: Checkout Repository
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1  # v7.0.1
         with:
           persist-credentials: false
 
-      # -----------------------------
-      # 2. Setup Apache Solr (Release Action)
-      # -----------------------------
-      - name: ⚡ Setup Apache Solr Infrastructure (Release)
+      - name: Setup Apache Solr Infrastructure (Release)
         # Release smoke-test must track the published v1 tag, not a pinned SHA
         uses: dhavalgojiya/setup-solr-action@v1  # zizmor: ignore[unpinned-uses]
         with:
@@ -45,18 +36,15 @@ jobs:
           solr-core-name: ${{ env.SOLR_CORE_NAME }}
           solr-custom-configset-path: ${{ matrix.configset }}
 
-      # -----------------------------
-      # 3. Verify Solr is Running
-      # -----------------------------
-      - name: ✅ Verify Solr Health
+      - name: Verify Solr Health
         run: |
           echo "Pinging Solr Core: ${SOLR_CORE_NAME}"
-          RESPONSE=$(curl -s --fail "http://127.0.0.1:8983/solr/${SOLR_CORE_NAME}/admin/ping?wt=json")
+          RESPONSE=$(curl -sS --fail-with-body "http://127.0.0.1:8983/solr/${SOLR_CORE_NAME}/admin/ping?wt=json" || true)
 
           if echo "$RESPONSE" | grep -q '"status":"OK"'; then
             echo "🎉 Solr is healthy and responding"
           else
-            echo "❌ Solr ping failed!"
+            echo "::error title=Solr ping failed::Core ${SOLR_CORE_NAME} did not respond with status OK"
             echo "Response: $RESPONSE"
             exit 1
           fi

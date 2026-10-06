@@ -15,58 +15,37 @@ permissions:
   contents: read
 
 jobs:
-  # -----------------------------
-  # Job: Package Checks & Build
-  # -----------------------------
   package:
     runs-on: ubuntu-latest
     timeout-minutes: 10
     steps:
-      # -----------------------------
-      # 1. Checkout Repository
-      # -----------------------------
-      - name: 📥 Checkout Repository
+      - name: Checkout Repository
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1  # v7.0.1
         with:
           persist-credentials: false
 
-      # -----------------------------
-      # 2. Setup Node.js
-      # -----------------------------
-      - name: ⚙️ Setup Node.js
+      - name: Setup Node.js
         uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020  # v7.0.0
         with:
-          node-version-file: .nvmrc
+          node-version-file: ".nvmrc"
           cache: "npm"
           cache-dependency-path: "**/package-lock.json"
 
-      # -----------------------------
-      # 3. Check package-lock.json is up-to-date
-      # -----------------------------
-      - name: 🔒 Check package-lock.json Sync
+      - name: Check package-lock.json Sync
         run: npx --yes package-lock-utd@1.1.3
 
-      # -----------------------------
-      # 4. Install Dependencies
-      # -----------------------------
-      - name: 📦 Install Dependencies
+      - name: Install Dependencies
         run: npm ci
 
-      # -----------------------------
-      # 5. Build the Package
-      # -----------------------------
-      - name: 🏗️ Run Build
+      - name: Run Build
         run: npm run build
 
-      # -----------------------------
-      # 6. Verify committed dist/ is up-to-date
-      # -----------------------------
-      - name: 🔍 Verify dist/ is up-to-date
+      - name: Verify dist/ is up-to-date
         run: |
           # --porcelain catches modified, deleted, AND newly added untracked files
           CHANGES=$(git status --porcelain -- dist/)
           if [ -n "$CHANGES" ]; then
-            echo "❌ dist/ is out of date. Run 'npm run build' and commit the result."
+            echo "::error title=dist/ out of date::Run 'npm run build' and commit the result."
             echo "$CHANGES"
             exit 1
           fi

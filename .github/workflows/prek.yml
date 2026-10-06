@@ -15,23 +15,14 @@ permissions:
   contents: read
 
 jobs:
-  # -----------------------------
-  # Job: Prek
-  # -----------------------------
   prek:
     runs-on: ubuntu-latest
     timeout-minutes: 10
     steps:
-      # -----------------------------
-      # 1. Checkout Repository
-      # -----------------------------
-      - name: 📥 Checkout Repository
+      - name: Checkout Repository
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1  # v7.0.1
         with:
           persist-credentials: false
 
-      # -----------------------------
-      # 2. Run prek hooks
-      # -----------------------------
-      - name: 🧹 Run prek hooks
+      - name: Run prek hooks
         uses: j178/prek-action@4e14d07f9231acabce116ccfca13b13dd9755ece  # v3.0.0

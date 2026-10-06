@@ -230,7 +230,7 @@ ______________________________________________________________________
 
 ## 👨‍💻 About the Author
 
-Hi, I’m **Dhaval Gojiya** — a passionate **Software Engineer** and also a **Farmer** 🌱.
+Hi, I'm **Dhaval Gojiya**, a passionate **Software Engineer** and also a **Farmer** 🌱.
 I love building open-source tools that simplify workflows, while staying curious and grounded in both tech and nature.
 
 ______________________________________________________________________
