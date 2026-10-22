@@ -40,7 +40,7 @@ repos:
       - id: trailing-whitespace
 
   - repo: https://github.com/biomejs/pre-commit
-    rev: v2.5.1
+    rev: v2.6.2
     hooks:
       - id: biome-check
 
@@ -48,6 +48,7 @@ repos:
     rev: v2.4.2
     hooks:
       - id: codespell
+        exclude: package-lock.json  # Integrity hashes contain fragments codespell flags as typos
         args:
           - --ignore-words-list=nd
         additional_dependencies:
