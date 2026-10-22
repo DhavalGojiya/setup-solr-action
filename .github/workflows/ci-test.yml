@@ -38,7 +38,8 @@ jobs:
           persist-credentials: false
 
       - name: Setup Apache Solr Infrastructure (Local)
-        uses: ./  # Use local action.yml
+        # Local action.yml; `$/` self-repository syntax is not yet accepted by actionlint
+        uses: ./  # zizmor: ignore[self-repository]
         with:
           solr-version: ${{ matrix.solr-version }}
           solr-core-name: ${{ env.SOLR_CORE_NAME }}
