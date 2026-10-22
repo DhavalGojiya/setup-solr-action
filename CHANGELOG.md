@@ -7,6 +7,29 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.2.1] - 2026-10-22
+
+### 📝 Documentation
+
+- Update README examples to Solr 10 and latest action versions ([#71](https://github.com/DhavalGojiya/setup-solr-action/pull/71))
+
+### 🧰 Maintenance
+
+- Bump codespell, shfmt, and zizmor in the pre-commit group ([#73](https://github.com/DhavalGojiya/setup-solr-action/pull/73))
+- Let Dependabot keep pre-commit hooks up to date ([#72](https://github.com/DhavalGojiya/setup-solr-action/pull/72))
+- Upgrade npm dependencies and fix npm audit vulnerabilities ([#70](https://github.com/DhavalGojiya/setup-solr-action/pull/70))
+- Pin `package-lock-utd` by integrity hash ([#69](https://github.com/DhavalGojiya/setup-solr-action/pull/69))
+- Bump `actions/setup-node` and `j178/prek-action` in the github-actions group ([#68](https://github.com/DhavalGojiya/setup-solr-action/pull/68))
+- Simplify CI workflows and improve Solr health check errors
+- Read Node version from `.nvmrc` in package workflow ([#67](https://github.com/DhavalGojiya/setup-solr-action/pull/67))
+- Bump `j178/prek-action` from 2.0.6 to 3.0.0 ([#66](https://github.com/DhavalGojiya/setup-solr-action/pull/66))
+- Bump `actions/checkout`, `actions/setup-node`, and `j178/prek-action` in the github-actions group ([#65](https://github.com/DhavalGojiya/setup-solr-action/pull/65))
+- Remove redundant Biome check from package workflow ([#63](https://github.com/DhavalGojiya/setup-solr-action/pull/63))
+- Bump Biome pre-commit hook to v2.5.1 ([#62](https://github.com/DhavalGojiya/setup-solr-action/pull/62))
+- Migrate pre-commit workflow to prek ([#61](https://github.com/DhavalGojiya/setup-solr-action/pull/61))
+- Upgrade `@actions/core` and `@actions/exec` to ESM-only v3 ([#60](https://github.com/DhavalGojiya/setup-solr-action/pull/60))
+- Upgrade dev dependencies ([#59](https://github.com/DhavalGojiya/setup-solr-action/pull/59))
+
 ## [1.2.0] - 2026-06-29
 
 ### 🚀 Features
@@ -133,4 +156,5 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 [1.0.4]: https://github.com/DhavalGojiya/setup-solr-action/compare/v1.0.3...v1.0.4
 [1.1.0]: https://github.com/DhavalGojiya/setup-solr-action/compare/v1.0.4...v1.1.0
 [1.2.0]: https://github.com/DhavalGojiya/setup-solr-action/compare/v1.1.0...v1.2.0
-[unreleased]: https://github.com/DhavalGojiya/setup-solr-action/compare/v1.2.0...HEAD
+[1.2.1]: https://github.com/DhavalGojiya/setup-solr-action/compare/v1.2.0...v1.2.1
+[unreleased]: https://github.com/DhavalGojiya/setup-solr-action/compare/v1.2.1...HEAD
