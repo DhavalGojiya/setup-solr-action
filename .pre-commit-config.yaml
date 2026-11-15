@@ -40,7 +40,7 @@ repos:
       - id: trailing-whitespace
 
   - repo: https://github.com/biomejs/pre-commit
-    rev: v2.6.4
+    rev: v2.6.6
     hooks:
       - id: biome-check
 
@@ -73,7 +73,7 @@ repos:
       - id: actionlint
 
   - repo: https://github.com/zizmorcore/zizmor-pre-commit
-    rev: v1.31.1
+    rev: v1.32.0
     hooks:
       - id: zizmor
 
